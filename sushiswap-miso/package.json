@@ -1,0 +1,9 @@
+{
+  "license": "MIT",
+  "devDependencies": {
+    "hardhat": "2.10.1",
+    "dotenv": "16.0.1",
+    "@nomiclabs/hardhat-ethers": "2.1.0",
+    "ethers": "5.6.9"
+  }
+}
