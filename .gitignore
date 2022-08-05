@@ -1,0 +1,6 @@
+venv
+cache
+out
+node_modules
+.env
+artifacts
