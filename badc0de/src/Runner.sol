@@ -59,8 +59,8 @@ contract Runner {
 
         // These seem to be parameters both sent to the callback and validated in logic at 0xdd6bd08c29ff3ef8780bf6a10d8b620a93ac5705.
         // So far, unclear what they represent.
-        // In exploiter's transaction, this was set to [{4, 1}, {1, 2}]. Perhaps these values were just replayed from another tx.
-        // It's also possible these are not the real types, even if I'm achieving a valid abi-encoded payload that can be successfully decoded.
+        // In exploiter's transaction, this seems to have been set to [{4, 1}, {1, 2}]. Perhaps just replayed from another tx.
+        // From debugging the EVM execution, I'm quite sure these are not the right data structures / types. Even if it does achieve a valid ABI-encoded payload that can be successfully decoded and makes the test pass.
         Params[] memory params = new Params[](2);
         params[0] = Params({ a: 0, b: 0 });
         params[1] = Params({ a: 1, b: 2 });
