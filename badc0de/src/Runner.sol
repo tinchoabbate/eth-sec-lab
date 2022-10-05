@@ -10,7 +10,7 @@ contract Runner {
 
     struct Caller {
         uint256 a;
-        address b;
+        address caller;
         address c;
         address d;
         bool e;
@@ -48,19 +48,22 @@ contract Runner {
      */
     function _getAbiEncodedPayload() private view returns (bytes memory) {
         // Naming this `caller` for lack of better context on what the rest of the fields represent.
-        // In any case, they don't seem to be needed for this scenario.
+        // In any case, most don't seem to be needed for this scenario.
+        // I'm grouping them together as a struct because during decoding for this piece of data, 5 words of memory are allocated together. Which are then filled with these 5 values
+        // In reality, you could just pass these and individual values without wrapping in a struct, and things work just fine.
         Caller memory caller = Caller({
-            a: 0,                   // unclear meaning. Set to `3` in exploiter's transaction, though apparently irrelevant. Perhaps `3` was just replayed from another tx.
-            b: address(soloMargin), // Must match msg.sender according to badc0de's logic contract at 0xdd6bd08c29ff3ef8780bf6a10d8b620a93ac5705.
-            c: address(0),          // unclear meaning.
-            d: address(0),          // unclear meaning.
-            e: false                // unclear meaning. Could also be a uint256 type.
+            a: 0,                           // unclear meaning. Set to `3` in exploiter's transaction, though apparently irrelevant. Perhaps `3` was just replayed from another tx. Not used.
+            caller: address(soloMargin),    // Must match msg.sender according to badc0de's logic contract at 0xdd6bd08c29ff3ef8780bf6a10d8b620a93ac5705.
+            c: address(0),                  // unclear meaning. Not used.
+            d: address(0),                  // unclear meaning. Not used.
+            e: false                        // unclear meaning. Could also be a uint256 type. Not used.
         });
 
         // These seem to be parameters both sent to the callback and validated in logic at 0xdd6bd08c29ff3ef8780bf6a10d8b620a93ac5705.
         // So far, unclear what they represent.
         // In exploiter's transaction, this seems to have been set to [{4, 1}, {1, 2}]. Perhaps just replayed from another tx.
-        // From debugging the EVM execution, I'm quite sure these are not the right data structures / types. Even if it does achieve a valid ABI-encoded payload that can be successfully decoded and makes the test pass.
+        // From debugging the EVM execution, I'm quite sure these _are not_ the right data structures / types.
+        // Even if it does achieve a valid ABI-encoded payload that can be successfully decoded and makes the test pass.
         Params[] memory params = new Params[](2);
         params[0] = Params({ a: 0, b: 0 });
         params[1] = Params({ a: 1, b: 2 });
