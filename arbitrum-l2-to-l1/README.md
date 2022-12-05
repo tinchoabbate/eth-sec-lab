@@ -2,7 +2,7 @@
 
 Proof-of-concept code to showcase unsafe relaying of arbitrary L2-to-L1 messages in the Arbitrum bridge.
 
-For more details, [read the article](https://notonlyowner.com/research/).
+For more details, [read the article](https://notonlyowner.com/research/the-hazardous-zone-of-the-arbitrum-bridge).
 
 ## Install
 
@@ -31,4 +31,5 @@ Transactions are signed with the private key set in `$GOERLI_PK`. Except for the
 ## Disclaimer
 
 The code in this repository may be vulnerable. It is a proof of concept only distributed for educational purposes.
+
 DO NOT USE IN PRODUCTION.
