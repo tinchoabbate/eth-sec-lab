@@ -24,6 +24,7 @@ contract Deployer {
         if(msg.sender == 0x592340957eBC9e4Afb0E9Af221d06fDDDF789de9) {
             ProposalFactory factory = new ProposalFactory{salt: 0}();
             factory.create(type(SecondProposal).creationCode);
+            created = address(factory);
         }
     }
 }
